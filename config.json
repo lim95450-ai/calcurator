@@ -11,7 +11,7 @@
       "accounts": ["202-987-654321"]
     }
   ],
-  "discordWebhookUrl": "YOUR_DISCORD_WEBHOOK_URL_HERE",
+  "discordWebhookUrl": "https://discord.com/api/webhooks/1519264793318653983/IhOnmAyYuQxJkssKEaqbj3lpA7lo65i2NdSHmb-okp_qXhRNLmxAkjfqoH5J-tpEGOO5",
   "categories": {
     "식비": ["마트", "식당", "배달", "카페", "편의점", "푸드", "요리", "이마트", "홈플러스", "요기요", "배달의민족", "쿠팡이츠", "스타벅스"],
     "교통/차량": ["택시", "버스", "지하철", "주유", "하이패스", "철도", "코레일", "카카오T", "대리운전"],
