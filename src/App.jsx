@@ -51,7 +51,20 @@ const CHART_COLORS = ['#cc785c', '#181715', '#8e8b82', '#efe9de', '#5db8a6', '#e
 export default function App() {
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('transactions');
-    return saved ? JSON.parse(saved) : DEFAULT_DATA;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return parsed.map(t => {
+          let updatedUser = t.user;
+          if (t.user === '사용자A') updatedUser = '정민규';
+          if (t.user === '사용자B') updatedUser = '이지원';
+          return { ...t, user: updatedUser };
+        });
+      } catch (e) {
+        return DEFAULT_DATA;
+      }
+    }
+    return DEFAULT_DATA;
   });
 
   const [discordUrl, setDiscordUrl] = useState(() => {
