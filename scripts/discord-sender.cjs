@@ -161,24 +161,29 @@ async function run() {
   const sortedCategories = Object.entries(categoryExpenses)
     .sort((a, b) => b[1] - a[1]);
 
+  // 유저 지출 분석 텍스트 구성
   let userRatioText = "";
   const totalUserExpense = Object.values(userExpenses).reduce((a, b) => a + b, 0);
   if (totalUserExpense > 0) {
     userRatioText = Object.entries(userExpenses)
       .map(([name, amt]) => {
         const pct = ((amt / totalUserExpense) * 100).toFixed(1);
-        return `**${name}**: ${formatKRW(amt)} (${pct}%)`;
+        const displayName = name === '정민규' ? '정민규 🧑🏻' : name === '이지원' ? '이지원 👩🏻' : name;
+        return `**${displayName}**: ${formatKRW(amt)} (${pct}%)`;
       }).join('\n');
   } else {
     userRatioText = "지출 없음";
   }
 
+  // 카테고리 순위 텍스트 구성
   const categoryRankText = sortedCategories.length > 0 
     ? sortedCategories.map(([cat, amt], idx) => `${idx + 1}위. **${cat}**: ${formatKRW(amt)}`).join('\n')
     : "지출 없음";
 
+  // 최대 지출 텍스트
+  const displayMaxUser = maxExpense ? (maxExpense.user === '정민규' ? '정민규 🧑🏻' : maxExpense.user === '이지원' ? '이지원 👩🏻' : maxExpense.user) : '없음';
   const maxExpenseText = maxExpense 
-    ? `**${maxExpense.merchant}** (${maxExpense.category}) : ${formatKRW(maxExpense.amount)} [${maxExpense.user}]`
+    ? `**${maxExpense.merchant}** (${maxExpense.category}) : ${formatKRW(maxExpense.amount)} [${displayMaxUser}]`
     : "없음";
 
   const embed = {
